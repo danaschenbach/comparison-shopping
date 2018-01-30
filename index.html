@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Parts Comparison</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/styling.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<nav id="sidebar">
+				<div class="sidebar-header">
+					<h1>Price Finder</h1>
+				</div>
+				<ul class="list-unstyled components">
+					<h1>Filter Search</h1>
+					<div class="filter">
+						<li><input type="radio" name="type" value="Both" data-bind="checked: selectedType" />Both</li>
+						<li><input type="radio" name="type" value="Online" data-bind="checked: selectedType" />Online</li>
+						<li><input type="radio" name="type" value="In-Store" data-bind="checked: selectedType" />In-Store</li>
+						<ul class="mySearch-list" data-bind="foreach: filteredmySearch">
+							<li data-bind="text: name, click: $parent.showStores"></li>
+						</ul>
+					</div>
+					<hr>
+					<input data_bind="textInput: search" id="searchtext" placeholder="Price Search">
+					<button data-bind="click: searchStores">Begin</button>
+					<hr>
+					<ul class="price-container" data-bind="with: currentSearch"></ul>
+						<h4 id="price-header">Found Item At These Places:</h4>
+						<ul class="places">
+							<li data-bind="html: placeLinks"></li>
+						</ul>
+				</ul>
+			</nav>
