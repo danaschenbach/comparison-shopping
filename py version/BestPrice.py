@@ -100,3 +100,26 @@ def gconnect():
     login_session['access_token'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
     
+# Get user info
+    userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
+    params = {'access_token': credentials.access_token, 'alt': 'json'}
+    answer = requests.get(userinfo_url, params=params)
+
+    data = answer.json()
+
+    login_session['provider'] = 'google'
+    login_session['username'] = data['name']
+    login_session['email'] = data['email']
+
+# see if user exists, if they don't, login refused
+    user_id = getUserID(data["email"])
+    if not user_id:
+        return render_template('access denied.html')
+    else:
+        output = ''
+        output += '<h1>Welcome Back, '
+        output += login_session['username']
+        output += '!</h1>'
+        flash("you are now logged in")
+        print "done!"
+        return output
